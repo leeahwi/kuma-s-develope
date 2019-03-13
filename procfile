@@ -1,1 +1,1 @@
-worker: python ani_kingdom.py
+worker: python animalbot.py
