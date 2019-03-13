@@ -1,7 +1,6 @@
 import discord
 import asyncio
 import openpyxl
-import random
 import os
 
 
