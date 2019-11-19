@@ -4,20 +4,20 @@ import openpyxl
 import os
 
 
-client = discord.Client()
+bot = discord.Client()
 
-@client.event
+@bot.event
 async def on_ready():
     print("login")
     print(client.user.name)
     print(client.user.id)
     print("ㅡㅡㅡㅡㅡㅡ")
-    await client.change_presence(game=discord.Game(name='테스트 중', type=1))
+    await bot.change_presence(game=discord.Game(name='공부중', type=1))
 
-@client.event
+@bot.event
 async def on_message(message):
     if message.content.startswith("!안녕"):
-        await client.send_message(message.channel, "안녕하세요")
+        await bot.send_message(message.channel, "안녕하세요")
 
 
 access_token = os.environ['BOT_TOKEN']
