@@ -36,7 +36,8 @@ async def on_message(message):
  
     if message.content.startswith('hi'):
         await client.send_message(message.channel, embed=discord.Embed(description="hi"))
-        @client.event
+	
+@client.event
 async def on_message(message):
 
 	if message.author == client.user: #봇이 채팅을 쳤을 때 명령어로 인식되지 않음
