@@ -30,15 +30,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
- 
-    if message.author == client.user:
-        return
- 
-    if message.content.startswith('hi'):
-        await client.send_message(message.channel, embed=discord.Embed(description="hi"))
-	
-@client.event
-async def on_message(message):
 
 	if message.author == client.user: #봇이 채팅을 쳤을 때 명령어로 인식되지 않음
 		return
@@ -122,7 +113,6 @@ async def on_message(message):
 			playstr += str(i+1)+" : "+playlist[i]+"\n"
 		await client.send_message(message.channel, playstr+"```")
 
- 
         
 access_token = os.environ['BOT_TOKEN']
 client.run(access_token)
