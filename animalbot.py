@@ -54,6 +54,16 @@ async def on_message(message):
 		channel = message.author.voice.voice_channel 
 		server = message.server
 		voice_client = client.voice_client_in(server)
+		
+		try:
+			player = await voice_client.create_ytdl_player(url,after=lambda:queue(server.id),before_options="-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5")
+			playerlist[server.id] = player
+			playlist.append(player.title)
+		except youtube_dl.utils.DownloadError: #유저가 제대로 된 유튜브 경로를 입력하지 않았을 때
+			await client.send_message(message.channel, embed=discord.Embed(title=":no_entry_sign: 존재하지 않는 경로입니다.",colour = 0x2EFEF7))
+			await voice_client.disconnect()
+			return
+		player.start()
 
 		if client.is_voice_connected(server) and not playerlist[server.id].is_playing(): #봇이 음성채널에 접속해있으나 음악을 재생하지 않을 때
 			await voice_client.disconnect()
@@ -73,15 +83,6 @@ async def on_message(message):
 			await client.send_message(message.channel, embed=discord.Embed(title=":no_entry_sign: 음성채널에 접속하고 사용해주세요.",colour = 0x2EFEF7))
 			return
 
-		try:
-			player = await voice_client.create_ytdl_player(url,after=lambda:queue(server.id),before_options="-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5")
-			playerlist[server.id] = player
-			playlist.append(player.title)
-		except youtube_dl.utils.DownloadError: #유저가 제대로 된 유튜브 경로를 입력하지 않았을 때
-			await client.send_message(message.channel, embed=discord.Embed(title=":no_entry_sign: 존재하지 않는 경로입니다.",colour = 0x2EFEF7))
-			await voice_client.disconnect()
-			return
-		player.start()
 
 	if message.content == "!종료": #음성채널에서 봇을 나가게 하기
 		server = message.server
