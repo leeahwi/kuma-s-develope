@@ -43,7 +43,7 @@ async def on_message(message):
 		msg = message.content.split(" ")
 		try:
 			url = msg[1]
-			url1 = re.match('(https?://)?(www\.)?((youtube\.(com))/watch\?v=([-\w]+)|youtu\.be/([-\w]+))', url) #정규 표현식을 사용해 url 검사
+			url1 = re.match('http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)[\w\=]*)?', url) #정규 표현식을 사용해 url 검사
 			if url1 == None:
 				await client.send_message(message.channel, embed=discord.Embed(title=":no_entry_sign: url을 제대로 입력해주세요.",colour = 0x2EFEF7))
 				return
