@@ -11,6 +11,12 @@ from settings import *
 
 client = discord.Client()
 
+TOKEN = os.environ['BOT_TOKEN']
+BOTID = os.environ['BOT_USER_ID']
+OWNERID = os.environ['SERVER_OWNER_USER_ID']
+COMMANDPREFIX = '>'
+
+
 @client.event
 async def on_ready():
     print('Logged in...')
@@ -60,19 +66,19 @@ async def on_voice_state_update(before, after):
 async def on_message(message):
     # If the message author isn't the bot and the message starts with the
     # command prefix ('!' by default), check if command was executed
-    if message.author.id != config.BOTID and message.content.startswith(config.COMMANDPREFIX):
+    if message.author.id != BOTID and message.content.startswith(COMMANDPREFIX):
 	# 봇의 메세지가 명령으로 인식 안되게 함
         # Remove prefix and change to lowercase so commands aren't case-sensitive
         message.content = message.content[1:].lower()
           #conmmandprefix 다음 내용을 message.content로 받음
         # Shuts the bot down - only usable by the bot owner specified in config
-        if message.content.startswith('shutdown') and message.author.id == config.OWNERID:
+        if message.content.startswith('shutdown') and message.author.id == OWNERID:
             await client.send_message(message.channel, '전 이제 잘게요~ 쿰나잇')
             await client.logout()
             await client.close()
 
         # Allows owner to set the game status of the bot
-        elif message.content.startswith('status') and message.author.id == config.OWNERID:
+        elif message.content.startswith('status') and message.author.id == OWNERID:
             await client.change_presence(game=discord.Game(name=message.content[7:]))
 	#ex)!status with discord studing > discord studing으로 봇 상태 변경
 	
@@ -179,4 +185,4 @@ async def on_message(message):
                 await client.send_message(message.channel, 'Not currently playing audio.')
 		
         
-client.run(config.TOKEN)
+client.run(TOKEN)
