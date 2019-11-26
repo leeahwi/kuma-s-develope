@@ -7,3 +7,5 @@ BOTID = os.environ['BOT_USER_ID_HERE']
 OWNERID = os.environ['SERVER_OWNER_USER_ID_HERE']
 
 COMMANDPREFIX = '>'
+
+#HEROKU에서 값 가져오고 커맨드키 '!'에서 '>'로 변경
