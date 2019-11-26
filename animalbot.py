@@ -99,5 +99,84 @@ async def on_message(message):
         elif message.content.startswith('cat'):
             await client.send_message(message.channel, cats.getCatPicture())
 	#features/cats.py
+	
+ ########## VOICE COMMANDS ##########
+
+        # Will join the voice channel of the message author if they're in a channel
+        # and the bot is not currently connected to a voice channel
+        elif message.content.startswith('join'):
+            if message.author.voice_channel != None and client.is_voice_connected(message.server) != True:
+                global currentChannel
+                global player
+                global voice
+                currentChannel = client.get_channel(message.author.voice_channel.id)
+                voice = await client.join_voice_channel(currentChannel)
+
+            elif message.author.voice_channel == None:
+                await client.send_message(message.channel, '절 부른 사람이 음성채널에 없어요..')
+
+            else:
+                await client.send_message(message.channel, '이미 들왔어!')
+		
+	# Will leave the current voice channel
+        elif message.content.startswith('leave'):
+            if client.is_voice_connected(message.server):
+                currentChannel = client.voice_client_in(message.server)
+                await currentChannel.disconnect()
+		
+		
+   # Will play music using the following words as search parameters or use the
+        # linked video if a link is provided
+        elif message.content.startswith('play'):
+            if message.author.voice_channel != None:
+		#유저가 음성채널에 들어가 있는경우
+                if client.is_voice_connected(message.server) == True:
+			#음성 연결 완료시
+                    try:
+                        if player.is_playing() == False:
+                            print('추가...중...')
+                            player = await voice.create_ytdl_player(youtubeLink.getYoutubeLink(message.content))
+                            player.start()
+                            await client.send_message(message.channel, ':musical_note: Currently Playing: ' + player.title)
+
+                        else:
+                            print('is playing')
+
+                    except NameError:
+                        print('name error')
+                        player = await voice.create_ytdl_player(youtubeLink.getYoutubeLink(message.content))
+                        player.start()
+                        await client.send_message(message.channel, ':musical_note: Currently Playing: ' + player.title)
+
+                else:
+                    await client.send_message(message.channel, '!join 치면 되(돼?)')
+
+            else:
+                await client.send_message(message.channel, 'You are not connected to a voice channel. Enter a voice channel and use !join first.')
+
+        # Will pause the audio player
+        elif message.content.startswith('pause'):
+            try:
+                player.pause()
+
+            except NameError:
+                await client.send_message(message.channel, 'Not currently playing audio.')
+
+        # Will resume the audio player
+        elif message.content.startswith('resume'):
+            try:
+                player.resume()
+
+            except NameError:
+                await client.send_message(message.channel, 'Not currently playing audio.')
+
+        # Will stop the audio player
+        elif message.content.startswith('stop'):
+            try:
+                player.stop()
+
+            except NameError:
+                await client.send_message(message.channel, 'Not currently playing audio.')
+		
         
 client.run(config.TOKEN)
