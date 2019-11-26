@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import youtube_dl
+import requests
 import re
 import openpyxl
 import os
