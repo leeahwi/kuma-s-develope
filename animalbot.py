@@ -6,6 +6,8 @@ import re
 import openpyxl
 import os
 
+from features import *
+from settings import *
 
 client = discord.Client()
 
@@ -116,5 +118,4 @@ async def on_message(message):
 		await client.send_message(message.channel, playstr+"```")
 
         
-access_token = os.environ['BOT_TOKEN']
-client.run(access_token)
+client.run(config.TOKEN)
