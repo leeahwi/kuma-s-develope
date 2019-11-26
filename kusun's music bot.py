@@ -184,5 +184,5 @@ async def on_message(message):
             except NameError:
                 await client.send_message(message.channel, 'Not currently playing audio.')
 		
-#TOKEN = os.environ['BOT_TOKEN']
-client.run('NTU0OTA4NjI1MDE0MDk1ODcz.Xd0NzQ.hqraBcaongZfRu7jsaS-GhgA1tg')
+TOKEN = os.environ['BOT_TOKEN']
+client.run(TOKEN)
