@@ -1,6 +1,7 @@
 from settings import *
 
 helpMessage = '''
+{0}기본 명령 시작 >
 {0}join
 Will join the voice channel that you're in.
 {0}leave
