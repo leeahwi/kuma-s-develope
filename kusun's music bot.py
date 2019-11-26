@@ -11,7 +11,7 @@ from settings import *
 
 client = discord.Client()
 
-TOKEN = os.environ['BOT_TOKEN']
+
 BOTID = os.environ['BOT_USER_ID']
 OWNERID = os.environ['SERVER_OWNER_USER_ID']
 COMMANDPREFIX = '>'
@@ -184,5 +184,5 @@ async def on_message(message):
             except NameError:
                 await client.send_message(message.channel, 'Not currently playing audio.')
 		
-        
-client.run(TOKEN)
+#TOKEN = os.environ['BOT_TOKEN']
+client.run('NTU0OTA4NjI1MDE0MDk1ODcz.Xd0NzQ.hqraBcaongZfRu7jsaS-GhgA1tg')
