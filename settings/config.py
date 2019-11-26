@@ -1,10 +1,9 @@
-import 
+import os
 
+TOKEN = os.environ['BOT_TOKEN']
+KEY = os.environ['BOT_KEY']
 
-TOKEN = 'BOT_TOKEN_HERE'
-KEY = 'BOT_KEY_HERE'
+BOTID = os.environ['BOT_USER_ID_HERE']
+OWNERID = os.environ['SERVER_OWNER_USER_ID_HERE']
 
-BOTID = 'BOT_USER_ID_HERE'
-OWNERID = 'SERVER_OWNER_USER_ID_HERE'
-
-COMMANDPREFIX = '!'
+COMMANDPREFIX = '>'
