@@ -11,25 +11,12 @@ from settings import *
 
 client = discord.Client()
 
-que = {}
-playerlist = {}
-playlist = list() #재생목록 리스트
-
-def queue(id): #음악 재생용 큐
-	if que[id] != []:
-		player = que[id].pop(0)
-		playerlist[id] = player
-		del playlist[0]
-		player.start()
-
 @client.event
 async def on_ready():
-    print("login")
-    print(client.user.name)
-    print(client.user.id)
-    print("ㅡㅡㅡㅡㅡㅡ")
-    game = discord.Game("simsim")
-    await client.change_presence(activity=game, status=None)
+    print('Logged in...')
+    print('Username: ' + str(client.user.name))
+    print('Client ID: ' + str(client.user.id))
+    print('Invite URL: ' + 'https://discordapp.com/oauth2/authorize?&client_id=' + client.user.id + '&scope=bot&permissions=0')
 
 @client.event
 async def on_message(message):
