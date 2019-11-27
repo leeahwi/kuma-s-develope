@@ -3,3 +3,5 @@ asyncio
 youtube_dl
 requests
 gtts
+aiohttp
+websockets
