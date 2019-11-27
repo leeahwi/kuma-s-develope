@@ -9,12 +9,6 @@ from settings import *
 
 client = discord.Client()
 
-
-BOTID = os.environ['BOT_USER_ID']
-OWNERID = os.environ['SERVER_OWNER_USER_ID']
-COMMANDPREFIX = '>'
-
-
 @client.event
 async def on_ready():
     print('Logged in...')
