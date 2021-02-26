@@ -1,6 +1,6 @@
 asyncio
 youtube_dl
-aiohttp==1.0.5
+aiohttp==3.7.4
 async-timeout==3.0.1
 attrs==18.2.0
 beautifulsoup4==4.7.1
